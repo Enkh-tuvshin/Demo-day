@@ -2,7 +2,7 @@ import { Tabs } from 'expo-router';
 
 const TabLayout: React.FC = () => {
   return (
-    <Tabs>
+    <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen
         name="index"
         options={{
@@ -13,6 +13,14 @@ const TabLayout: React.FC = () => {
         name="two"
         options={{
           title: 'Tab Two',
+          headerShown: true,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          headerShown: true,
         }}
       />
     </Tabs>
