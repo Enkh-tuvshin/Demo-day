@@ -40,7 +40,7 @@ export default function Login() {
       </TouchableOpacity>
       <View style={{ flexDirection: 'row', gap: 4, margin: 10 }}>
         <Text>You already have a account?</Text>
-        <Link href={'/login'}>
+        <Link href={'/(tabs)/components/login'}>
           <Text style={{ color: 'blue' }}>SIGN UP</Text>
         </Link>
       </View>

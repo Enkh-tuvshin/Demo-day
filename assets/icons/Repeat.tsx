@@ -3,11 +3,12 @@ import { Svg, Path } from 'react-native-svg';
 export const Repeat = () => {
   return (
     <Svg
-      width="40"
-      height="40"
+      width="44"
+      height="44"
+      style={{ marginHorizontal: 10 }}
       viewBox="0 0 24 24"
       stroke-width="1.5"
-      stroke="white"
+      stroke="#ffffff"
       fill="none"
       stroke-linecap="round"
       stroke-linejoin="round">

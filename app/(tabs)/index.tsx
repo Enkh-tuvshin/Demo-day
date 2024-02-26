@@ -1,7 +1,7 @@
 import { Repeat } from '@/assets/icons/Repeat';
-import { Camera, CameraType } from 'expo-camera';
-import { useRef, useState } from 'react';
-import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Camera, CameraType, WhiteBalance } from 'expo-camera';
+import { useState } from 'react';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Constants from 'expo-constants';
 import { Microphone } from '@/assets/icons/Microphone';
 
@@ -29,34 +29,66 @@ export default function TabTwoScreen() {
 
   return (
     <View style={styles.container}>
-      <Camera style={{ flex: 1, height: '50%' }} type={type} ref={(ref) => setCamera(ref)}>
-        <Text>Azaa</Text>
+      <Camera
+        style={{ flex: 1, height: '100%', width: 'auto' }}
+        type={type}
+        ref={(ref) => setCamera(ref)}>
+        <Text>.</Text>
       </Camera>
-      <Camera style={{ flex: 1, height: '50%' }} type={user} ref={(ref) => setCamera2(ref)}>
-        <TouchableOpacity onPress={handleFlipCamera}>
-          <Repeat />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Microphone />
-        </TouchableOpacity>
-        <View
-          style={{ flexDirection: 'row', height: '100%', width: '100%', alignItems: 'flex-end' }}>
-          <TouchableOpacity style={{ width: '50%', height: 50, backgroundColor: 'red' }}>
-            <Text style={{ color: 'white' }}>Back</Text>
+
+      <Camera
+        style={{ flex: 1, height: 'auto', width: 'auto' }}
+        type={user}
+        ref={(ref) => setCamera2(ref)}>
+        <View style={{ alignItems: 'flex-end' }}>
+          <TouchableOpacity onPress={handleFlipCamera}>
+            <Repeat />
           </TouchableOpacity>
-          <TouchableOpacity style={{ width: '50%', height: 50, backgroundColor: 'green' }}>
-            <Text style={{ color: 'white' }}>Start</Text>
+          <TouchableOpacity>
+            <Microphone />
           </TouchableOpacity>
         </View>
+        <View style={{ flexDirection: 'row', alignItems: 'flex-end', height: 252 }}>
+          <TouchableOpacity
+            style={{
+              width: '50%',
+              height: 50,
+              backgroundColor: 'red',
+              padding: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            activeOpacity={0.7}>
+            <Text style={{ color: '#fff' }}>Back</Text>
+          </TouchableOpacity>
+          <View style={{ width: '100%' }}>
+            <TouchableOpacity
+              style={{
+                width: '50%',
+                height: 50,
+                backgroundColor: 'green',
+                padding: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              activeOpacity={0.7}>
+              <Text style={{ color: '#fff' }}>Start</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </Camera>
+      <TouchableOpacity activeOpacity={0.4}>
+        <View style={styles.chat}>
+          <Text>Chat</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: 'auto',
-    height: '100%',
+    flex: 1,
     paddingTop: Constants.statusBarHeight,
   },
   title: {
@@ -67,5 +99,14 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: '80%',
+  },
+  chat: {
+    width: '100%',
+    height: 50,
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    elevation: 18,
   },
 });

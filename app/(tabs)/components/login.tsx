@@ -1,12 +1,12 @@
 import { Link } from 'expo-router';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
-export default function Login() {
+export default function Login () {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleLogin() {
+  const handleLogin = () => {
     // Implement your login logic here
     console.log('Username:', username);
     console.log('Password:', password);
@@ -41,7 +41,7 @@ export default function Login() {
       </TouchableOpacity>
       <View style={{ flexDirection: 'row', gap: 4, margin: 10 }}>
         <Text>You don't have a account?</Text>
-        <Link href={'/signup'}>
+        <Link href={'/(tabs)/components/signup'}>
           <Text style={{ color: 'blue' }}>LOGIN</Text>
         </Link>
       </View>

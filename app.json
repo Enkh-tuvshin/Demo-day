@@ -47,6 +47,12 @@
         {
           "fonts": ["path/to/file.ttf"]
         }
+      ],
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
       ]
     ],
     "experiments": {
