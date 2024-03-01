@@ -1,20 +1,37 @@
-import { Repeat } from '@/assets/icons/Repeat';
-import { Camera, CameraType, WhiteBalance } from 'expo-camera';
-import { useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Constants from 'expo-constants';
+import { Video, ResizeMode } from 'expo-av';
+import { Camera, CameraType } from 'expo-camera';
+import React, { useRef, useState } from 'react';
+import {
+  Button,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  useWindowDimensions,
+} from 'react-native';
+
+import Header from './components/Header';
+
+import { ChatUp } from '@/assets/icons/ChatUp';
+import { FilterEmoji } from '@/assets/icons/FilterEmoji';
 import { Microphone } from '@/assets/icons/Microphone';
+import { Repeat } from '@/assets/icons/Repeat';
 
 export default function TabTwoScreen() {
+  const video = useRef(null);
+  const [status, setStatus] = useState<any>({});
   const [type, setType] = useState(CameraType.front);
   const [user, setUser] = useState(CameraType.front);
+  const [text, setText] = useState<'Back' | 'Start' | 'Skip'>('Start');
+  const { width, height: windowHeight } = useWindowDimensions();
+  const height = Math.round((width * 1) / 1);
 
   const [camera, setCamera] = useState<any>(null);
   const [camera2, setCamera2] = useState<any>(null);
 
-  const [status, requestPermission] = Camera.useCameraPermissions();
+  const [statistic, requestPermission] = Camera.useCameraPermissions();
 
-  if (!status || !status.granted) {
+  if (!statistic || !statistic.granted) {
     return (
       <View style={styles.container}>
         <Text>Give camera permission</Text>
@@ -27,28 +44,16 @@ export default function TabTwoScreen() {
     setUser(user === CameraType.front ? CameraType.back : CameraType.front);
   };
 
-  return (
-    <View style={styles.container}>
-      <Camera
-        style={{ flex: 1, height: '100%', width: 'auto' }}
-        type={type}
-        ref={(ref) => setCamera(ref)}>
-        <Text>.</Text>
-      </Camera>
+  // const start = () => {};
 
-      <Camera
-        style={{ flex: 1, height: 'auto', width: 'auto' }}
-        type={user}
-        ref={(ref) => setCamera2(ref)}>
-        <View style={{ alignItems: 'flex-end' }}>
-          <TouchableOpacity onPress={handleFlipCamera}>
-            <Repeat />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Microphone />
-          </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'flex-end', height: 252 }}>
+  // const skip = () => {};
+
+  // const back =() => {}
+
+  const Footer = () => {
+    return (
+      <>
+        <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
           <TouchableOpacity
             style={{
               width: '50%',
@@ -59,37 +64,76 @@ export default function TabTwoScreen() {
               alignItems: 'center',
             }}
             activeOpacity={0.7}>
-            <Text style={{ color: '#fff' }}>Back</Text>
+            <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>Back</Text>
           </TouchableOpacity>
-          <View style={{ width: '100%' }}>
-            <TouchableOpacity
-              style={{
-                width: '50%',
-                height: 50,
-                backgroundColor: 'green',
-                padding: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              activeOpacity={0.7}>
-              <Text style={{ color: '#fff' }}>Start</Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              width: '50%',
+              height: 50,
+              backgroundColor: '#298553',
+              padding: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            onPress={() => setText('Skip')}
+            activeOpacity={0.7}>
+            <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>{text}</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity activeOpacity={0.4}>
+          <View style={styles.chat}>
+            <Text>Chat</Text>
+            <ChatUp />
           </View>
+        </TouchableOpacity>
+      </>
+    );
+  };
+
+  return (
+    <>
+      <Header />
+      <View style={styles.container}>
+        <Video
+          ref={video}
+          style={{ flex: 1 }}
+          source={{ uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
+          resizeMode={ResizeMode.CONTAIN}
+        />
+
+        <View style={{ flex: 1, overflow: 'hidden' }}>
+          <Camera
+            style={{
+              marginTop: -150,
+              width: width,
+              height: width * 1.33,
+            }}
+            type={user}
+            ref={(ref) => setCamera2(ref)}
+            ratio="4:3">
+            <View style={{ alignItems: 'flex-end' }}>
+              <TouchableOpacity onPress={handleFlipCamera}>
+                <Repeat />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Microphone />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <FilterEmoji />
+              </TouchableOpacity>
+            </View>
+          </Camera>
         </View>
-      </Camera>
-      <TouchableOpacity activeOpacity={0.4}>
-        <View style={styles.chat}>
-          <Text>Chat</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
+        <Footer />
+      </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#fff',
   },
   title: {
     fontSize: 20,
@@ -102,11 +146,11 @@ const styles = StyleSheet.create({
   },
   chat: {
     width: '100%',
-    height: 50,
-    borderWidth: 2,
+    height: 45,
+    borderWidth: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
-    elevation: 18,
+    flexDirection: 'row',
   },
 });

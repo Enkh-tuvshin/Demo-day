@@ -1,6 +1,6 @@
-import { Svg, Path } from 'react-native-svg';
+import { Path, Svg } from 'react-native-svg';
 
-export const Microphone = () => {
+export const FilterEmoji = () => {
   return (
     <Svg
       width="30"
@@ -13,10 +13,10 @@ export const Microphone = () => {
       stroke-linecap="round"
       stroke-linejoin="round">
       <Path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <Path d="M9 2m0 3a3 3 0 0 1 3 -3h0a3 3 0 0 1 3 3v5a3 3 0 0 1 -3 3h0a3 3 0 0 1 -3 -3z" />
-      <Path d="M5 10a7 7 0 0 0 14 0" />
-      <Path d="M8 21l8 0" />
-      <Path d="M12 17l0 4" />
+      <Path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+      <Path d="M9 10l.01 0" />
+      <Path d="M15 10l.01 0" />
+      <Path d="M9.5 15a3.5 3.5 0 0 0 5 0" />
     </Svg>
   );
 };

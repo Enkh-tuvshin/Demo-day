@@ -25,6 +25,23 @@ const TabLayout: React.FC = () => {
       />
       <Tabs.Screen name="components/login" options={{ title: 'Login' }} />
       <Tabs.Screen name="components/signup" options={{ title: 'Sign up' }} />
+      <Tabs.Screen
+        name="components/Header"
+        options={{
+          title: 'Navbar',
+          tabBarIconStyle: { display: 'none' },
+          tabBarLabelStyle: { display: 'none' },
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: 'Settings',
+          tabBarIconStyle: { display: 'none' },
+          tabBarLabelStyle: { display: 'none' },
+          headerShown: true,
+        }}
+      />
     </Tabs>
   );
 };

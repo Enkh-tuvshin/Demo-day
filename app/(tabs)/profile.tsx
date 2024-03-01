@@ -1,8 +1,9 @@
+import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import { Gallery } from '@/assets/icons/Gallery';
+
 import { Camera } from '@/assets/icons/Camera';
+import { Gallery } from '@/assets/icons/Gallery';
 
 export default function Profile() {
   const [username, setUserName] = useState('');
@@ -14,7 +15,7 @@ export default function Profile() {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1,
+      quality: 4,
     });
     if (!result.canceled) {
       setImage(result.assets[0]);
@@ -47,7 +48,14 @@ export default function Profile() {
             style={
               a
                 ? { display: 'none' }
-                : { display: 'flex', width: 150, height: 150, borderRadius: 100, borderWidth: 3, borderColor: 'black' }
+                : {
+                    display: 'flex',
+                    width: 150,
+                    height: 150,
+                    borderRadius: 100,
+                    borderWidth: 3,
+                    borderColor: 'black',
+                  }
             }
           />
           <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -83,6 +91,7 @@ export default function Profile() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
   },
