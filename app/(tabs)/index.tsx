@@ -11,25 +11,37 @@ import {
 } from 'react-native';
 
 import Header from './components/Header';
+import Spinner from './components/spinner';
 
 import { ChatUp } from '@/assets/icons/ChatUp';
 import { FilterEmoji } from '@/assets/icons/FilterEmoji';
 import { Microphone } from '@/assets/icons/Microphone';
 import { Repeat } from '@/assets/icons/Repeat';
+import { useGetTodoListQuery } from '@/graphql/generated';
 
-export default function TabTwoScreen() {
+const Home = () => {
   const video = useRef(null);
-  const [status, setStatus] = useState<any>({});
-  const [type, setType] = useState(CameraType.front);
   const [user, setUser] = useState(CameraType.front);
   const [text, setText] = useState<'Back' | 'Start' | 'Skip'>('Start');
   const { width, height: windowHeight } = useWindowDimensions();
-  const height = Math.round((width * 1) / 1);
-
-  const [camera, setCamera] = useState<any>(null);
   const [camera2, setCamera2] = useState<any>(null);
-
+  const { data, error, loading } = useGetTodoListQuery();
   const [statistic, requestPermission] = Camera.useCameraPermissions();
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Spinner />
+      </View>
+    );
+  }
+  if (error) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Error: {error.message}</Text>
+      </View>
+    );
+  }
 
   if (!statistic || !statistic.granted) {
     return (
@@ -39,16 +51,9 @@ export default function TabTwoScreen() {
       </View>
     );
   }
-
   const handleFlipCamera = () => {
     setUser(user === CameraType.front ? CameraType.back : CameraType.front);
   };
-
-  // const start = () => {};
-
-  // const skip = () => {};
-
-  // const back =() => {}
 
   const Footer = () => {
     return (
@@ -111,7 +116,7 @@ export default function TabTwoScreen() {
             type={user}
             ref={(ref) => setCamera2(ref)}
             ratio="4:3">
-            <View style={{ alignItems: 'flex-end' }}>
+            <View style={{ alignItems: 'flex-end', flex: 1, justifyContent: 'center' }}>
               <TouchableOpacity onPress={handleFlipCamera}>
                 <Repeat />
               </TouchableOpacity>
@@ -128,7 +133,7 @@ export default function TabTwoScreen() {
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -154,3 +159,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
+
+export default Home;

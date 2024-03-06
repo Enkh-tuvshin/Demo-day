@@ -1,13 +1,31 @@
+import { useSignIn } from '@clerk/clerk-expo';
 import { Link } from 'expo-router';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default function Login() {
+  const { signIn, setActive, isLoaded } = useSignIn();
+
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
-  const handleLogin = () => {
-    
+  const handleLogin = async () => {
+    if (!isLoaded) {
+      return;
+    }
+
+    try {
+      const completeSignIn = await signIn.create({
+        identifier: username,
+        password,
+      });
+      // This is an important step,
+      // This indicates the user is signed in
+      await setActive({ session: completeSignIn.createdSessionId });
+    } catch (err: unknown) {
+      console.log(err);
+    }
+
     console.log('Username:', username);
     console.log('Password:', password);
   };

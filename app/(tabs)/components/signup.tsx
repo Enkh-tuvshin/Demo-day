@@ -8,7 +8,7 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const SignUp = async (): Promise<void> => {
+  const signup = async (): Promise<void> => {
     if (!isLoaded) {
       return;
     }
@@ -50,7 +50,7 @@ export default function Login() {
           onChangeText={(text) => setPassword(text)}
         />
       </View>
-      <TouchableOpacity style={styles.loginBtn} onPress={SignUp}>
+      <TouchableOpacity style={styles.loginBtn} onPress={signup}>
         <Text style={styles.loginText}>Бүртгүүлэх</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.loginBtn}>

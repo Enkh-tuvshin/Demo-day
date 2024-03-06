@@ -9,13 +9,6 @@ const TabLayout: React.FC = () => {
           title: 'Tab One',
         }}
       />
-      {/* <Tabs.Screen
-        name="two"
-        options={{
-          title: 'Tab Two',
-          headerShown: true,
-        }}
-      /> */}
       <Tabs.Screen
         name="profile"
         options={{
@@ -29,16 +22,12 @@ const TabLayout: React.FC = () => {
         name="components/Header"
         options={{
           title: 'Navbar',
-          tabBarIconStyle: { display: 'none' },
-          tabBarLabelStyle: { display: 'none' },
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
           title: 'Settings',
-          tabBarIconStyle: { display: 'none' },
-          tabBarLabelStyle: { display: 'none' },
           headerShown: true,
         }}
       />
