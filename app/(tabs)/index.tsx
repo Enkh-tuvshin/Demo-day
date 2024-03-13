@@ -19,7 +19,7 @@ import { Microphone } from '@/assets/icons/Microphone';
 import { Repeat } from '@/assets/icons/Repeat';
 import { useGetTodoListQuery } from '@/graphql/generated';
 
-const Home = () => {
+const Home = (): React.ReactNode => {
   const video = useRef(null);
   const [user, setUser] = useState(CameraType.front);
   const [text, setText] = useState<'Back' | 'Start' | 'Skip'>('Start');
@@ -51,11 +51,11 @@ const Home = () => {
       </View>
     );
   }
-  const handleFlipCamera = () => {
+  const handleFlipCamera = (): void => {
     setUser(user === CameraType.front ? CameraType.back : CameraType.front);
   };
 
-  const Footer = () => {
+  const Footer = (): React.ReactNode => {
     return (
       <>
         <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
