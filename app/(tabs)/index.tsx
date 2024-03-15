@@ -1,5 +1,6 @@
 import { Video, ResizeMode } from 'expo-av';
 import { Camera, CameraType } from 'expo-camera';
+import { Link } from 'expo-router';
 import React, { useRef, useState } from 'react';
 import {
   Button,
@@ -86,10 +87,12 @@ const Home = (): React.ReactNode => {
           </TouchableOpacity>
         </View>
         <TouchableOpacity activeOpacity={0.4}>
-          <View style={styles.chat}>
-            <Text>Chat</Text>
-            <ChatUp />
-          </View>
+          <Link href={'./components/Chat'}>
+            <View style={styles.chat}>
+              <Text>Chat</Text>
+              <ChatUp />
+            </View>
+          </Link>
         </TouchableOpacity>
       </>
     );
@@ -157,6 +160,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     shadowColor: '#000',
     flexDirection: 'row',
+    paddingHorizontal: 180,
   },
 });
 

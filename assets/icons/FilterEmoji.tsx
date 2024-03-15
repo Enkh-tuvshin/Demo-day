@@ -1,6 +1,6 @@
 import { Path, Svg } from 'react-native-svg';
 
-export const FilterEmoji = () => {
+export const FilterEmoji = (): React.ReactNode => {
   return (
     <Svg
       width="30"

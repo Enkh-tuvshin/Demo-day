@@ -1,6 +1,6 @@
 import { Path, Svg } from 'react-native-svg';
 
-export const Settings = () => {
+export const Settings = (): React.ReactNode => {
   return (
     <Svg
       width="30"

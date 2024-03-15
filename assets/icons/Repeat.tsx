@@ -1,6 +1,6 @@
 import { Svg, Path } from 'react-native-svg';
 
-export const Repeat = () => {
+export const Repeat = (): React.ReactNode => {
   return (
     <Svg
       width="30"

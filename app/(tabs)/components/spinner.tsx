@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { ActivityIndicator, View, StyleSheet } from 'react-native';
 
 interface SpinnerProps {
-  size?: number; // Optional prop to control spinner size
-  color?: string; // Optional prop to control spinner color
+  size?: number;
+  color?: string;
 }
 
 const Spinner: React.FC<SpinnerProps> = ({ size = 40, color = '#000' }) => {
@@ -16,7 +16,7 @@ const Spinner: React.FC<SpinnerProps> = ({ size = 40, color = '#000' }) => {
 
   return (
     <View style={styles.container}>
-      {isLoading && <ActivityIndicator size={size} color={color} width={1000} height={100000} />}
+      {isLoading && <ActivityIndicator size={size} color={color} />}
     </View>
   );
 };
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
   },
 });
 

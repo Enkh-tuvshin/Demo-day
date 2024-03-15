@@ -1,6 +1,6 @@
 import { Svg, Path } from 'react-native-svg';
 
-export const Microphone = () => {
+export const Microphone = (): React.ReactNode => {
   return (
     <Svg
       width="30"

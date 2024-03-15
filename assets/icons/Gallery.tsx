@@ -1,6 +1,6 @@
 import { Svg, Path } from 'react-native-svg';
 
-export const Gallery = () => {
+export const Gallery = (): React.ReactNode => {
   return (
     <Svg
       width="44"
