@@ -1,7 +1,7 @@
-import { Video, ResizeMode } from 'expo-av';
+// import { Video, ResizeMode } from 'expo-av';
 import { Camera, CameraType } from 'expo-camera';
 import { Link } from 'expo-router';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   StyleSheet,
@@ -21,14 +21,16 @@ import { Repeat } from '@/assets/icons/Repeat';
 import { useGetTodoListQuery } from '@/graphql/generated';
 
 const Home = (): React.ReactNode => {
-  const video = useRef(null);
+  // const video = useRef(null);
   const [user, setUser] = useState(CameraType.front);
   const [text, setText] = useState<'Back' | 'Start' | 'Skip'>('Start');
   const { width, height: windowHeight } = useWindowDimensions();
-  const [camera2, setCamera2] = useState<any>(null);
+  const [camera, setCamera] = useState<any>(null);
   const { data, error, loading } = useGetTodoListQuery();
   const [statistic, requestPermission] = Camera.useCameraPermissions();
 
+  if (data) {
+  }
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -87,7 +89,7 @@ const Home = (): React.ReactNode => {
           </TouchableOpacity>
         </View>
         <TouchableOpacity activeOpacity={0.4}>
-          <Link href={'./components/Chat'}>
+          <Link href={'./components/ChatScreen'}>
             <View style={styles.chat}>
               <Text>Chat</Text>
               <ChatUp />
@@ -102,12 +104,20 @@ const Home = (): React.ReactNode => {
     <>
       <Header />
       <View style={styles.container}>
-        <Video
+        {/* user 1 */}
+
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text>User 1 show Camera</Text>
+        </View>
+
+        {/* <Video
           ref={video}
           style={{ flex: 1 }}
           source={{ uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
           resizeMode={ResizeMode.CONTAIN}
-        />
+        /> */}
+
+        {/* user 2 */}
 
         <View style={{ flex: 1, overflow: 'hidden' }}>
           <Camera
@@ -117,7 +127,7 @@ const Home = (): React.ReactNode => {
               height: width * 1.33,
             }}
             type={user}
-            ref={(ref) => setCamera2(ref)}
+            ref={(ref) => setCamera(ref)}
             ratio="4:3">
             <View style={{ alignItems: 'flex-end', flex: 1, justifyContent: 'center' }}>
               <TouchableOpacity onPress={handleFlipCamera}>

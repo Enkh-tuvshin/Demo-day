@@ -3,25 +3,27 @@ import { Link } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
-export default function Login() {
+export default function Login(): React.ReactNode {
   const { signIn, setActive, isLoaded } = useSignIn();
 
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
-  const handleLogin = async () => {
+  const handleLogin = async (): Promise<void> => {
+    console.log(setActive, signIn);
     if (!isLoaded) {
       return;
     }
 
     try {
-      const completeSignIn = await signIn.create({
+      const completeSignIn = await signIn?.create({
         identifier: username,
         password,
       });
+      console.log(completeSignIn);
       // This is an important step,
       // This indicates the user is signed in
-      await setActive({ session: completeSignIn.createdSessionId });
+      await setActive({ session: completeSignIn?.createdSessionId });
     } catch (err: unknown) {
       console.log(err);
     }

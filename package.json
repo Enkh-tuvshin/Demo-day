@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.9.5",
-    "@clerk/clerk-expo": "^0.20.6",
+    "@clerk/clerk-expo": "^0.20.10",
     "@config-plugins/react-native-webrtc": "^8.0.0",
     "@expo/vector-icons": "^14.0.0",
     "@firebase/firestore": "^4.5.0",
@@ -29,7 +29,7 @@
     "@prisma/client": "5.11.0",
     "@react-native-community/netinfo": "11.1.0",
     "@react-native-picker/picker": "^2.6.1",
-    "@react-navigation/native": "^6.0.2",
+    "@react-navigation/native": "^6.1.17",
     "@stream-io/flat-list-mvcp": "^0.10.3",
     "@stream-io/react-native-webrtc": "^118.0.1",
     "@stream-io/video-react-native-sdk": "^0.5.3",

@@ -3,12 +3,14 @@ import { Link, router } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
-export default function Login() {
+export default function Login(): React.ReactNode {
   const { isLoaded, signUp, setActive } = useSignUp();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const signup = async (): Promise<void> => {
+    console.log(setActive, signUp);
+
     if (!isLoaded) {
       return;
     }

@@ -1239,24 +1239,24 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@clerk/clerk-expo@^0.20.6":
-  version "0.20.6"
-  resolved "https://registry.npmjs.org/@clerk/clerk-expo/-/clerk-expo-0.20.6.tgz"
-  integrity sha512-Wfce1IyROBuATpFVVVxNxRMKfatw5lMWg2Rfm/BRM/8h15XQgX/3tkcP8mI/T7i6Dpfn2RCB/TjqLZ12O3w7Lg==
+"@clerk/clerk-expo@^0.20.10":
+  version "0.20.10"
+  resolved "https://registry.npmjs.org/@clerk/clerk-expo/-/clerk-expo-0.20.10.tgz"
+  integrity sha512-RHjIpQPEB8gs0YnPVRCHYzObIyxocsXycRHDQGEP60Rn32pF1lbPvJOfRxU13734w+OXs06cEtsoJLA8H3ECtQ==
   dependencies:
-    "@clerk/clerk-js" "4.70.1"
-    "@clerk/clerk-react" "4.30.6"
-    "@clerk/shared" "1.3.2"
+    "@clerk/clerk-js" "4.70.5"
+    "@clerk/clerk-react" "4.30.7"
+    "@clerk/shared" "1.3.3"
     base-64 "1.0.0"
     react-native-url-polyfill "2.0.0"
 
-"@clerk/clerk-js@4.70.1":
-  version "4.70.1"
-  resolved "https://registry.npmjs.org/@clerk/clerk-js/-/clerk-js-4.70.1.tgz"
-  integrity sha512-oJHMvR7+u5JVN2hD2CbduI6B2oUKK6crqJagSBSSADOPqtvzhe8CnQq21vvVpfIo8oFt3NoMrRv0eBgoa0Gbyw==
+"@clerk/clerk-js@4.70.5":
+  version "4.70.5"
+  resolved "https://registry.npmjs.org/@clerk/clerk-js/-/clerk-js-4.70.5.tgz"
+  integrity sha512-rB1V0VjFh4JVgj+/Yjdjjz4YmlGp7ao0i5KZQDLYknGxOJyHScKpmIqmyeKMz8wXfza1kcT9q9m1nSBQpR1KlA==
   dependencies:
     "@clerk/localizations" "1.26.16"
-    "@clerk/shared" "1.3.2"
+    "@clerk/shared" "1.3.3"
     "@clerk/types" "3.62.1"
     "@emotion/cache" "11.11.0"
     "@emotion/react" "11.11.1"
@@ -1271,12 +1271,12 @@
     qs "6.11.0"
     regenerator-runtime "0.13.11"
 
-"@clerk/clerk-react@4.30.6":
-  version "4.30.6"
-  resolved "https://registry.npmjs.org/@clerk/clerk-react/-/clerk-react-4.30.6.tgz"
-  integrity sha512-huBZK2tIfvj8CAJ88M4ZjvtqxoB22VEhT/RjPHMb/+YCfp0/WKG+vAnC1yG0HnM/SYvl+0cPKLDpp9kKTVZFzw==
+"@clerk/clerk-react@4.30.7":
+  version "4.30.7"
+  resolved "https://registry.npmjs.org/@clerk/clerk-react/-/clerk-react-4.30.7.tgz"
+  integrity sha512-+6Q1hVteqn66gFLiCKSqqSdz2MBjsEjs1fkGLAEKZC1GdfOKrH6oWcLuSwUdyqRvJWuyjeIgwq15zoHtXKyztA==
   dependencies:
-    "@clerk/shared" "1.3.2"
+    "@clerk/shared" "1.3.3"
     "@clerk/types" "3.62.1"
     tslib "2.4.1"
 
@@ -1287,10 +1287,10 @@
   dependencies:
     "@clerk/types" "3.62.1"
 
-"@clerk/shared@1.3.2":
-  version "1.3.2"
-  resolved "https://registry.npmjs.org/@clerk/shared/-/shared-1.3.2.tgz"
-  integrity sha512-nyxJNyrSkJxCD0da3Rx0SqPQqS8qDFUYVAdmero5DV/+TL9OTvycM19d9S0TrwensdpN0s48xRgx08qI7Q6l4Q==
+"@clerk/shared@1.3.3":
+  version "1.3.3"
+  resolved "https://registry.npmjs.org/@clerk/shared/-/shared-1.3.3.tgz"
+  integrity sha512-Eein8cK72dlvY6Q1uFuw9K9MJH1OPjU8FzWloMTKklBo+iPiM6+uENGeGwlY5KId3q/kgPwRc2hBQnUoaijxCQ==
   dependencies:
     glob-to-regexp "0.4.1"
     js-cookie "3.0.1"
@@ -3241,6 +3241,11 @@
   resolved "https://registry.npmjs.org/@pkgr/core/-/core-0.1.1.tgz"
   integrity sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==
 
+"@prisma/client@5.11.0":
+  version "5.11.0"
+  resolved "https://registry.npmjs.org/@prisma/client/-/client-5.11.0.tgz"
+  integrity sha512-SWshvS5FDXvgJKM/a0y9nDC1rqd7KG0Q6ZVzd+U7ZXK5soe73DJxJJgbNBt2GNXOa+ysWB4suTpdK5zfFPhwiw==
+
 "@prisma/debug@5.11.0":
   version "5.11.0"
   resolved "https://registry.npmjs.org/@prisma/debug/-/debug-5.11.0.tgz"
@@ -3689,15 +3694,17 @@
     color "^4.2.3"
     warn-once "^0.1.0"
 
-"@react-navigation/core@^6.4.10":
-  version "6.4.10"
+"@react-navigation/core@^6.4.16":
+  version "6.4.16"
+  resolved "https://registry.npmjs.org/@react-navigation/core/-/core-6.4.16.tgz"
+  integrity sha512-UDTJBsHxnzgFETR3ZxhctP+RWr4SkyeZpbhpkQoIGOuwSCkt1SE0qjU48/u6r6w6XlX8OqVudn1Ab0QFXTHxuQ==
   dependencies:
     "@react-navigation/routers" "^6.1.9"
     escape-string-regexp "^4.0.0"
     nanoid "^3.1.23"
     query-string "^7.1.3"
     react-is "^16.13.0"
-    use-latest-callback "^0.1.7"
+    use-latest-callback "^0.1.9"
 
 "@react-navigation/elements@^1.3.22":
   version "1.3.22"
@@ -3708,10 +3715,12 @@
     "@react-navigation/elements" "^1.3.22"
     warn-once "^0.1.0"
 
-"@react-navigation/native@^6.0.0", "@react-navigation/native@^6.0.2", "@react-navigation/native@~6.1.6":
-  version "6.1.10"
+"@react-navigation/native@^6.0.0", "@react-navigation/native@^6.1.17", "@react-navigation/native@~6.1.6":
+  version "6.1.17"
+  resolved "https://registry.npmjs.org/@react-navigation/native/-/native-6.1.17.tgz"
+  integrity sha512-mer3OvfwWOHoUSMJyLa4vnBH3zpFmCwuzrBPlw7feXklurr/ZDiLjLxUScOot6jLRMz/67GyilEYMmP99LL0RQ==
   dependencies:
-    "@react-navigation/core" "^6.4.10"
+    "@react-navigation/core" "^6.4.16"
     escape-string-regexp "^4.0.0"
     fast-deep-equal "^3.1.3"
     nanoid "^3.1.23"
@@ -12520,7 +12529,7 @@ pretty-format@^4.2.1:
   resolved "https://registry.npmjs.org/pretty-format/-/pretty-format-4.3.1.tgz"
   integrity sha512-EhjEW6Rwv9P4KzazNy6PEb1p1EX8gl5cUrTMfZzHDhgFGEYY3F6Xysn9ja/XJ0g6UcEOHxA7Mya+McxiPXJK7Q==
 
-prisma@^5.11.0:
+prisma@*, prisma@^5.11.0:
   version "5.11.0"
   resolved "https://registry.npmjs.org/prisma/-/prisma-5.11.0.tgz"
   integrity sha512-KCLiug2cs0Je7kGkQBN9jDWoZ90ogE/kvZTUTgz2h94FEo8pczCkPH7fPNXkD1sGU7Yh65risGGD1HQ5DF3r3g==
@@ -15324,8 +15333,10 @@ urlpattern-polyfill@^8.0.0:
   resolved "https://registry.npmjs.org/urlpattern-polyfill/-/urlpattern-polyfill-8.0.2.tgz"
   integrity sha512-Qp95D4TPJl1kC9SKigDcqgyM2VDVO4RiJc2d4qe5GrYm+zbIQCWWKAFaJNQ4BhdFeDGwBmAxqJBwWSJDb9T3BQ==
 
-use-latest-callback@^0.1.7:
+use-latest-callback@^0.1.9:
   version "0.1.9"
+  resolved "https://registry.npmjs.org/use-latest-callback/-/use-latest-callback-0.1.9.tgz"
+  integrity sha512-CL/29uS74AwreI/f2oz2hLTW7ZqVeV5+gxFeGudzQrgkCytrHw33G4KbnQOrRlAEzzAFXi7dDLMC9zhWcVpzmw==
 
 use-memo-one@1.1.3:
   version "1.1.3"
