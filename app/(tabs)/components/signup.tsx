@@ -20,6 +20,7 @@ export default function Login(): React.ReactNode {
         username,
         password,
       });
+      console.log(JSON.stringify(CompleteSignup));
       await setActive({ session: CompleteSignup.createdSessionId });
       router.replace('/');
     } catch (err: unknown) {
@@ -31,7 +32,6 @@ export default function Login(): React.ReactNode {
 
   return (
     <View style={styles.container}>
-      {/* <Image source={{ uri: require('../../assets/tv-logo.jpg') }} height={100} width={100} /> */}
       <Text style={styles.logo}>Mongol TV</Text>
       <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>Шинэ бүртгэлийн нэр</Text>
       <View style={styles.inputView}>

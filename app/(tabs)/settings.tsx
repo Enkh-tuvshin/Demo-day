@@ -1,6 +1,6 @@
 import { useAuth } from '@clerk/clerk-expo';
 import CheckBox from 'expo-checkbox';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
@@ -11,15 +11,14 @@ export default function Settings(): React.ReactNode {
   const [isChecked2, setIsChecked2] = useState(false);
 
   const handleSignOut = (): void => {
-    console.log('hello');
     console.log(isSignedIn);
-    signOut();
-    // .then(() => {
-    //   router.push('./components/login');
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    signOut()
+      .then(() => {
+        router.push('./components/login');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

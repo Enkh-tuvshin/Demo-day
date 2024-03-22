@@ -1,40 +1,34 @@
 import { useSignIn } from '@clerk/clerk-expo';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default function Login(): React.ReactNode {
   const { signIn, setActive, isLoaded } = useSignIn();
 
-  const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleLogin = async (): Promise<void> => {
-    console.log(setActive, signIn);
+  const onSignInPress = async (): Promise<void> => {
     if (!isLoaded) {
       return;
     }
 
     try {
-      const completeSignIn = await signIn?.create({
+      const completeSignIn = await signIn.create({
         identifier: username,
         password,
       });
-      console.log(completeSignIn);
-      // This is an important step,
-      // This indicates the user is signed in
-      await setActive({ session: completeSignIn?.createdSessionId });
+      await setActive({ session: completeSignIn.createdSessionId });
+      router.replace('/');
     } catch (err: unknown) {
-      console.log(err);
+      console.log(JSON.stringify(err));
     }
-
-    console.log('Username:', username);
-    console.log('Password:', password);
+    console.log('username:', username);
+    console.log('password:', password);
   };
-
   return (
     <View style={styles.container}>
-      {/* <Image source={{ uri: require('../../assets/tv-logo.jpg') }} height={100} width={100} /> */}
       <Text style={styles.logo}>Mongol TV</Text>
       <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>Нэвтрэх нэр</Text>
       <View style={styles.inputView}>
@@ -58,7 +52,7 @@ export default function Login(): React.ReactNode {
       <Link href={'/'} style={{ width: '80%', textAlign: 'right' }}>
         <Text>Нууц үгээ мартсан уу?</Text>
       </Link>
-      <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
+      <TouchableOpacity style={styles.loginBtn} onPress={() => onSignInPress()}>
         <Text style={styles.loginText}>Нэвтрэх</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.loginBtn}>
