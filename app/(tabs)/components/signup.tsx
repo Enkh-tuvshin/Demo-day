@@ -1,39 +1,37 @@
 import { useSignUp } from '@clerk/clerk-expo';
-import { Link, router } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default function Login(): React.ReactNode {
   const { isLoaded, signUp, setActive } = useSignUp();
+  const router = useRouter();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const signup = async (): Promise<void> => {
-    console.log(setActive, signUp);
-
+  const onSignUpPress = async (): Promise<void> => {
     if (!isLoaded) {
       return;
     }
-
     try {
-      const CompleteSignup = await signUp.create({
+      const completeSignUp = await signUp.create({
         username,
         password,
       });
-      console.log(JSON.stringify(CompleteSignup));
-      await setActive({ session: CompleteSignup.createdSessionId });
-      router.replace('/');
+      await setActive({ session: completeSignUp.createdSessionId });
+      router.push('/');
     } catch (err: unknown) {
       console.error(JSON.stringify(err, null, 2));
     }
-    console.log('Username:', username);
-    console.log('Password:', password);
+    console.log(username);
+    console.log(password);
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>Mongol TV</Text>
-      <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>Шинэ бүртгэлийн нэр</Text>
+      <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>Шинэ бүртгэлийн нэр:</Text>
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
@@ -42,7 +40,7 @@ export default function Login(): React.ReactNode {
           onChangeText={(text) => setUsername(text)}
         />
       </View>
-      <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>Шинэ нууц үг</Text>
+      <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>Шинэ нууц үг:</Text>
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
@@ -52,7 +50,7 @@ export default function Login(): React.ReactNode {
           onChangeText={(text) => setPassword(text)}
         />
       </View>
-      <TouchableOpacity style={styles.loginBtn} onPress={signup}>
+      <TouchableOpacity style={styles.loginBtn} onPress={onSignUpPress}>
         <Text style={styles.loginText}>Бүртгүүлэх</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.loginBtn}>
@@ -81,6 +79,11 @@ const styles = StyleSheet.create({
     color: '#000',
     marginBottom: 40,
   },
+  inputContView: {
+    width: '80%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   inputView: {
     width: '80%',
     borderWidth: 1,
@@ -93,6 +96,23 @@ const styles = StyleSheet.create({
   inputText: {
     height: 50,
     color: 'black',
+  },
+  inputText1: {
+    width: '50%',
+    height: 50,
+    color: 'black',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    marginRight: 10,
+  },
+  inputText2: {
+    width: '50%',
+    height: 50,
+    color: 'black',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 20,
   },
   loginBtn: {
     width: '80%',

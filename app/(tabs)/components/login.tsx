@@ -30,6 +30,22 @@ export default function Login(): React.ReactNode {
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>Mongol TV</Text>
+      {/* <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>Email хаяг:</Text>
+      <View style={styles.inputContView}>
+        <TextInput
+          style={styles.inputText1}
+          placeholder="Email хаяг"
+          placeholderTextColor="#gray"
+          onChangeText={(text) => setEmailAddress(text)}
+        />
+        <TextInput
+          style={styles.inputText2}
+          placeholder="Утасны дугаар"
+          placeholderTextColor="#gray"
+          keyboardType="numeric"
+          onChangeText={(text) => setPhoneNumber(text)}
+        />
+      </View> */}
       <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>Нэвтрэх нэр</Text>
       <View style={styles.inputView}>
         <TextInput
@@ -81,6 +97,11 @@ const styles = StyleSheet.create({
     color: '#000',
     marginBottom: 40,
   },
+  inputContView: {
+    width: '80%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   inputView: {
     width: '80%',
     borderWidth: 1,
@@ -93,6 +114,23 @@ const styles = StyleSheet.create({
   inputText: {
     height: 50,
     color: 'black',
+  },
+  inputText1: {
+    width: '50%',
+    height: 50,
+    color: 'black',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 20,
+    marginRight: 10,
+  },
+  inputText2: {
+    width: '50%',
+    height: 50,
+    color: 'black',
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 20,
   },
   loginBtn: {
     width: '80%',

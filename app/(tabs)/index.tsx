@@ -1,4 +1,5 @@
 // import { Video, ResizeMode } from 'expo-av';
+import { useUser } from '@clerk/clerk-expo';
 import { Camera, CameraType } from 'expo-camera';
 import { Link } from 'expo-router';
 import React, { useState } from 'react';
@@ -9,6 +10,7 @@ import {
   TouchableOpacity,
   View,
   useWindowDimensions,
+  Image,
 } from 'react-native';
 
 import Header from './components/Header';
@@ -22,12 +24,14 @@ import { useGetTodoListQuery } from '@/graphql/generated';
 
 const Home = (): React.ReactNode => {
   // const video = useRef(null);
-  const [user, setUser] = useState(CameraType.front);
-  const [text, setText] = useState<'Back' | 'Start' | 'Skip'>('Start');
+  const [users, setUsers] = useState(CameraType.front);
+  const [text, setText] = useState<'Буцах' | 'Эхлэх' | 'Алгасах'>('Эхлэх');
+  const [image, setImage] = useState<any>(null);
   const { width, height: windowHeight } = useWindowDimensions();
   const [camera, setCamera] = useState<any>(null);
   const { data, error, loading } = useGetTodoListQuery();
   const [statistic, requestPermission] = Camera.useCameraPermissions();
+  const { user } = useUser();
 
   if (data) {
   }
@@ -55,7 +59,7 @@ const Home = (): React.ReactNode => {
     );
   }
   const handleFlipCamera = (): void => {
-    setUser(user === CameraType.front ? CameraType.back : CameraType.front);
+    setUsers(users === CameraType.front ? CameraType.back : CameraType.front);
   };
 
   const Footer = (): React.ReactNode => {
@@ -71,8 +75,9 @@ const Home = (): React.ReactNode => {
               justifyContent: 'center',
               alignItems: 'center',
             }}
+            onPress={() => setText('Эхлэх')}
             activeOpacity={0.7}>
-            <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>Back</Text>
+            <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>Буцах</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -83,7 +88,7 @@ const Home = (): React.ReactNode => {
               justifyContent: 'center',
               alignItems: 'center',
             }}
-            onPress={() => setText('Skip')}
+            onPress={() => setText('Алгасах')}
             activeOpacity={0.7}>
             <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>{text}</Text>
           </TouchableOpacity>
@@ -105,9 +110,18 @@ const Home = (): React.ReactNode => {
       <Header />
       <View style={styles.container}>
         {/* user 1 */}
-
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>User 1 show Camera</Text>
+          <View
+            style={{
+              width: 100,
+              height: 100,
+              borderWidth: 1,
+              borderRadius: 100,
+              margin: 10,
+            }}>
+            <Image source={{ uri: image?.uri }} />
+          </View>
+          <Text style={{ fontSize: 16, fontWeight: '500' }}>{user?.username} show Camera</Text>
         </View>
 
         {/* <Video
@@ -126,7 +140,7 @@ const Home = (): React.ReactNode => {
               width: width,
               height: width * 1.33,
             }}
-            type={user}
+            type={users}
             ref={(ref) => setCamera(ref)}
             ratio="4:3">
             <View style={{ alignItems: 'flex-end', flex: 1, justifyContent: 'center' }}>
