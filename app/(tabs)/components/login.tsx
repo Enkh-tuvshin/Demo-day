@@ -65,7 +65,7 @@ export default function Login(): React.ReactNode {
           onChangeText={(text) => setPassword(text)}
         />
       </View>
-      <Link href={'/'} style={{ width: '80%', textAlign: 'right' }}>
+      <Link href={'(tabs)/components/changePassword'} style={{ width: '80%', textAlign: 'right' }}>
         <Text>Нууц үгээ мартсан уу?</Text>
       </Link>
       <TouchableOpacity style={styles.loginBtn} onPress={() => onSignInPress()}>

@@ -1,3 +1,4 @@
+import Constants from 'expo-constants';
 import { Link } from 'expo-router';
 import { StyleSheet, View, Text, Image } from 'react-native';
 
@@ -29,6 +30,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
+    paddingTop: Constants.statusBarHeight,
+    borderBottomWidth: 1,
   },
 });

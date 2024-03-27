@@ -1,6 +1,7 @@
 // import { Video, ResizeMode } from 'expo-av';
 import { useUser } from '@clerk/clerk-expo';
 import { Camera, CameraType } from 'expo-camera';
+import Constants from 'expo-constants';
 import { Link } from 'expo-router';
 import React, { useState } from 'react';
 import {
@@ -32,6 +33,7 @@ const Home = (): React.ReactNode => {
   const { data, error, loading } = useGetTodoListQuery();
   const [statistic, requestPermission] = Camera.useCameraPermissions();
   const { user } = useUser();
+  const [a, seta] = useState('');
 
   if (data) {
   }
@@ -42,13 +44,13 @@ const Home = (): React.ReactNode => {
       </View>
     );
   }
-  if (error) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Error: {error.message}</Text>
-      </View>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+  //       <Text>Error: {error.message}</Text>
+  //     </View>
+  //   );
+  // }
 
   if (!statistic || !statistic.granted) {
     return (
@@ -111,16 +113,23 @@ const Home = (): React.ReactNode => {
       <View style={styles.container}>
         {/* user 1 */}
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <View
-            style={{
-              width: 100,
-              height: 100,
-              borderWidth: 1,
-              borderRadius: 100,
-              margin: 10,
-            }}>
-            <Image source={{ uri: image?.uri }} />
-          </View>
+          {/* <Image source={{ uri: image?.uri }} /> */}
+          <Image
+            source={{ uri: image?.uri }}
+            style={
+              a
+                ? { display: 'none' }
+                : {
+                    justifyContent: 'center',
+                    width: 99,
+                    height: 99,
+                    borderRadius: 100,
+                    borderWidth: 1,
+                    borderColor: 'black',
+                    margin: 10,
+                  }
+            }
+          />
           <Text style={{ fontSize: 16, fontWeight: '500' }}>{user?.username} show Camera</Text>
         </View>
 

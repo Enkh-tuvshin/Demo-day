@@ -1,17 +1,16 @@
 import { useAuth } from '@clerk/clerk-expo';
+import Constants from 'expo-constants';
 import { Link, router } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Switch } from 'react-native';
 
+import { Back } from '@/assets/icons/Back';
+import { Logout } from '@/assets/icons/Logout';
 import { Profile } from '@/assets/icons/Profile';
 
 export default function Settings(): React.ReactNode {
   const { signOut, isSignedIn } = useAuth();
   const [isEnabled, setIsEnabled] = useState(false);
-
-  // const toggleSwitch = (): void => {
-  //   setIsEnabled((prev) => !prev);
-  // };
 
   const handleSignOut = (): void => {
     console.log(isSignedIn);
@@ -24,93 +23,129 @@ export default function Settings(): React.ReactNode {
       });
   };
 
-  return (
-    <View style={styles.container}>
-      <View style={{ padding: 30 }}>
-        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Өнгө</Text>
-        <View style={styles.Line1}>
-          <Text style={styles.text}>Хар</Text>
-          <Switch
-            trackColor={{ false: 'light', true: 'dark' }}
-            value={isEnabled}
-            onChange={() => setIsEnabled(isEnabled ? false : true)}
-          />
+  const Header = (): React.ReactNode => {
+    return (
+      <View style={styles.header}>
+        <View style={styles.backIcon}>
+          <Link href={'/'}>
+            <Back />
+          </Link>
         </View>
+        <Text style={{ fontSize: 20, fontWeight: '600', color: 'black' }}>Settings</Text>
       </View>
+    );
+  };
 
-      {/* 2 */}
-
-      <View
-        style={{
-          height: 100,
-          borderWidth: 2,
-          borderRadius: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Link href={'/(tabs)/profile'}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: 10,
-            }}>
-            <View>
-              <Profile />
-            </View>
-            <Text style={{ fontSize: 24, fontWeight: '500' }}>Нүүр хуудас</Text>
+  return (
+    <View style={styles.innerContainer}>
+      <Header />
+      <View style={styles.container}>
+        <View style={{ paddingVertical: 30 }}>
+          <Text style={{ fontSize: 16, fontWeight: '500', marginBottom: 15 }}>Өнгө солих:</Text>
+          <View style={styles.Line1}>
+            <Text style={styles.text}>Хар</Text>
+            <Switch
+              trackColor={{ false: 'light', true: 'dark' }}
+              value={isEnabled}
+              onChange={() => setIsEnabled(isEnabled ? false : true)}
+            />
           </View>
-        </Link>
-      </View>
+        </View>
 
-      {/* 3 */}
+        {/* 2 */}
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Link href={'/(tabs)/profile'}>
+            <View
+              style={{
+                flexDirection: 'row',
+                width: 350,
+                height: 80,
+                borderWidth: 2,
+                borderRadius: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: 10,
+              }}>
+              <Profile />
+              <Text style={{ fontSize: 24, fontWeight: '500' }}>Нүүр хуудас</Text>
+            </View>
+          </Link>
+        </View>
 
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: 20,
-        }}>
-        <TouchableOpacity
+        {/* 3 */}
+
+        <View
           style={{
-            width: '100%',
-            height: 80,
-            borderWidth: 3,
-            borderColor: 'red',
-            justifyContent: 'center',
+            flex: 1,
+            justifyContent: 'flex-end',
             alignItems: 'center',
-            borderRadius: 10,
-          }}
-          onPress={handleSignOut}>
-          <View
+          }}>
+          <TouchableOpacity
             style={{
               width: '100%',
-              height: '100%',
+              height: 80,
               justifyContent: 'center',
               alignItems: 'center',
-            }}>
-            <Text style={{ color: 'red', fontSize: 24, fontWeight: 'bold' }}>Гарах</Text>
-          </View>
-        </TouchableOpacity>
+              borderRadius: 10,
+            }}
+            onPress={handleSignOut}>
+            <View
+              style={{
+                flexDirection: 'row',
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: 5,
+              }}>
+              <Text style={{ color: 'red', fontSize: 20 }}>Гарах</Text>
+              <Logout />
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  innerContainer: {
     flex: 1,
-    padding: 10,
+    paddingTop: Constants.statusBarHeight,
     backgroundColor: 'white',
   },
-  Line1: {
+  header: {
+    flexDirection: 'row',
+    width: '100%',
+    height: 50,
+    borderBottomWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    paddingTop: Constants.statusBarHeight,
+  },
+  backIcon: {
+    position: 'absolute',
+    left: 0,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    flex: 1,
     padding: 20,
+  },
+  Line1: {
+    paddingHorizontal: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderWidth: 1,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
   text: {
-    fontSize: 24,
+    fontSize: 18,
   },
 });
