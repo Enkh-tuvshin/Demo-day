@@ -2,12 +2,22 @@ import { useSignIn } from '@clerk/clerk-expo';
 import { Link, router } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { SelectList } from 'react-native-dropdown-select-list';
 
 export default function Login(): React.ReactNode {
   const { signIn, setActive, isLoaded } = useSignIn();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [selected, setSelected] = useState('');
+
+  const data = [
+    { key: '1', value: 'USA' },
+    { key: '2', value: 'South Korea' },
+    { key: '3', value: 'Japan' },
+    { key: '4', value: 'India' },
+    { key: '5', value: 'Монгол' },
+  ];
 
   const onSignInPress = async (): Promise<void> => {
     if (!isLoaded) {
@@ -30,23 +40,9 @@ export default function Login(): React.ReactNode {
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>Mongol TV</Text>
-      {/* <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>Email хаяг:</Text>
-      <View style={styles.inputContView}>
-        <TextInput
-          style={styles.inputText1}
-          placeholder="Email хаяг"
-          placeholderTextColor="#gray"
-          onChangeText={(text) => setEmailAddress(text)}
-        />
-        <TextInput
-          style={styles.inputText2}
-          placeholder="Утасны дугаар"
-          placeholderTextColor="#gray"
-          keyboardType="numeric"
-          onChangeText={(text) => setPhoneNumber(text)}
-        />
-      </View> */}
-      <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>Нэвтрэх нэр</Text>
+      <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>
+        Нэвтрэх нэр / Email хаяг
+      </Text>
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
@@ -65,6 +61,13 @@ export default function Login(): React.ReactNode {
           onChangeText={(text) => setPassword(text)}
         />
       </View>
+      <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>Улс орон:</Text>
+      <SelectList
+        boxStyles={{ width: '80%' }}
+        setSelected={(val: any) => setSelected(val)}
+        data={data}
+        save="value"
+      />
       <Link href={'(tabs)/components/changePassword'} style={{ width: '80%', textAlign: 'right' }}>
         <Text>Нууц үгээ мартсан уу?</Text>
       </Link>

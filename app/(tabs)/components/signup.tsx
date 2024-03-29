@@ -1,14 +1,32 @@
+import { SelectList } from 'react-native-dropdown-select-list';
 import { useSignUp } from '@clerk/clerk-expo';
 import { Link, useRouter } from 'expo-router';
+import * as WebBrowser from 'expo-web-browser';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, SectionList } from 'react-native';
+
+WebBrowser.maybeCompleteAuthSession();
+
+// const COUNTRIES = [
+//   {
+//     data: ['Japan', 'Korea', 'English', 'Mongolia'],
+//   },
+// ];
 
 export default function Login(): React.ReactNode {
   const { isLoaded, signUp, setActive } = useSignUp();
   const router = useRouter();
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [selected, setSelected] = useState('');
+
+  const data = [
+    { key: '1', value: 'USA' },
+    { key: '2', value: 'South Korea' },
+    { key: '3', value: 'Japan' },
+    { key: '4', value: 'India' },
+    { key: '5', value: 'Монгол' },
+  ];
 
   const onSignUpPress = async (): Promise<void> => {
     if (!isLoaded) {
@@ -50,6 +68,13 @@ export default function Login(): React.ReactNode {
           onChangeText={(text) => setPassword(text)}
         />
       </View>
+      <Text style={{ width: '80%', textAlign: 'left', marginBottom: 5 }}>Улс орон:</Text>
+      <SelectList
+        boxStyles={{ width: '80%' }}
+        setSelected={(val: any) => setSelected(val)}
+        data={data}
+        save="value"
+      />
       <TouchableOpacity style={styles.loginBtn} onPress={onSignUpPress}>
         <Text style={styles.loginText}>Бүртгүүлэх</Text>
       </TouchableOpacity>

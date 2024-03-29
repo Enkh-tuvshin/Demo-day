@@ -1,22 +1,16 @@
 import { useUser } from '@clerk/clerk-expo';
 import * as ImagePicker from 'expo-image-picker';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { Camera } from '@/assets/icons/Camera';
 import { Gallery } from '@/assets/icons/Gallery';
 
 export default function ProfilePicture(): React.ReactNode {
-  const [image, setImage] = useState<any>(null);
+  const [image, setImage] = useState<null | any>(null);
   const [a, seta] = useState(false);
   const { user } = useUser();
   console.log(user?.primaryWeb3WalletId);
-
-  useEffect(() => {
-    if (user) {
-      setImage({ uri: user.primaryWeb3WalletId });
-    }
-  }, [user]);
 
   const captureImage = async (): Promise<void> => {
     const result = await ImagePicker.launchCameraAsync({
@@ -38,13 +32,7 @@ export default function ProfilePicture(): React.ReactNode {
     });
     if (!result.canceled) {
       setImage(result.assets[0]);
-      updateProfileImage(result.assets[0].uri);
     }
-  };
-
-  const updateProfileImage = async (profileImage: string): Promise<void> => {
-    await user?.update({ primaryWeb3WalletId: profileImage });
-    console.log('UPDATED PROFILE IMAGE');
   };
 
   return (

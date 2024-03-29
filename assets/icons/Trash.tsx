@@ -5,6 +5,7 @@ export const Trash = (): React.ReactNode => {
     <Svg
       width="20"
       height="20"
+      style={{ borderWidth: 1, borderColor: 'black' }}
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="#000"

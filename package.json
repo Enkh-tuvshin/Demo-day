@@ -67,6 +67,7 @@
     "react-native": "0.73.4",
     "react-native-auth0": "^3.1.0",
     "react-native-check-box": "^2.1.7",
+    "react-native-dropdown-select-list": "^2.0.5",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-gifted-chat": "^2.4.0",
     "react-native-incall-manager": "^4.2.0",
@@ -79,7 +80,8 @@
     "react-native-web": "~0.19.6",
     "stream-chat-expo": "^5.26.0",
     "stream-chat-react-native": "^5.26.0",
-    "useref": "^1.4.4"
+    "useref": "^1.4.4",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

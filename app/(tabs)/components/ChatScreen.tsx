@@ -55,10 +55,11 @@ const ChatScreen = (): React.ReactNode => {
           renderItem={({ item }) => (
             <View style={{ flex: 1, paddingHorizontal: 10 }}>
               <Text>{user?.username}:</Text>
-              <View style={{ width: '50%' }}>
-                <Text style={styles.text}>
-                  {item.text} <Trash />
-                </Text>
+              <View style={styles.lowCont}>
+                <Text style={styles.text}>{item.text}</Text>
+                <TouchableOpacity onPress={handleDelete}>
+                  <Trash />
+                </TouchableOpacity>
               </View>
             </View>
           )}
@@ -122,6 +123,11 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  lowCont: {
+    width: '50%',
+    flexDirection: 'row',
     alignItems: 'center',
   },
 });

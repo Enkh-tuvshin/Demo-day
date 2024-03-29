@@ -14,14 +14,14 @@ const RootLayoutNav: React.FC = () => {
     getToken(key: string) {
       try {
         return SecureStore.getItemAsync(key);
-      } catch (err) {
+      } catch {
         return null;
       }
     },
     saveToken(key: string, value: string) {
       try {
         return SecureStore.setItemAsync(key, value);
-      } catch (err) {
+      } catch {
         return null;
       }
     },
@@ -31,7 +31,7 @@ const RootLayoutNav: React.FC = () => {
     <ApolloProvider client={client}>
       <ClerkProvider publishableKey={String(key)} tokenCache={tokenCache}>
         <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="app/(tabs)" options={{ headerShown: false }} />
         </Stack>
       </ClerkProvider>
     </ApolloProvider>

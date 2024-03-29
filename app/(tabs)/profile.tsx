@@ -8,7 +8,7 @@ import ProfilePicture from './components/ProfilePicture';
 import { Back } from '@/assets/icons/Back';
 
 export default function Profile(): React.ReactNode {
-  const { user } = useUser();
+  const { user, country } = useUser();
 
   const Header = (): React.ReactNode => {
     return (
@@ -32,7 +32,9 @@ export default function Profile(): React.ReactNode {
           <Text style={{ fontSize: 24, fontWeight: '400', textAlign: 'center' }}>
             Нэр: {user?.username}
           </Text>
-          <Text style={{ fontSize: 24, fontWeight: '400', textAlign: 'center' }}>Улс: Монгол</Text>
+          <Text style={{ fontSize: 24, fontWeight: '400', textAlign: 'center' }}>
+            Улс: {country?.country}
+          </Text>
         </View>
       </View>
     </View>

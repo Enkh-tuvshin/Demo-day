@@ -1,9 +1,10 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
+  schema: 'https://nextjs-graphql-chi.vercel.app/api/graphql',
   documents: ['./graphql/documents/**/*.graphql'],
   generates: {
-    './src/graphql/generated/index.ts': {
+    './graphql/generated/index.ts': {
       overwrite: true,
       plugins: [
         'typescript',
