@@ -2,7 +2,7 @@ import { useUser } from '@clerk/clerk-expo';
 import Constants from 'expo-constants';
 import { Link } from 'expo-router';
 import React, { useState } from 'react';
-import { View, TextInput, FlatList, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 
 import { Back } from '@/assets/icons/Back';
 import { SendChat } from '@/assets/icons/SendChat';
@@ -32,11 +32,20 @@ const ChatScreen = (): React.ReactNode => {
     return (
       <View style={styles.header}>
         <View style={styles.backIcon}>
-          <Link href={'/'}>
+          <Link href="/">
             <Back />
           </Link>
         </View>
-        <Text style={{ fontSize: 20, fontWeight: '600', color: 'black' }}>Settings</Text>
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: '600',
+            color: 'black',
+            zIndex: 1,
+            textAlign: 'center',
+          }}>
+          Chat
+        </Text>
       </View>
     );
   };
@@ -57,7 +66,7 @@ const ChatScreen = (): React.ReactNode => {
               <Text>{user?.username}:</Text>
               <View style={styles.lowCont}>
                 <Text style={styles.text}>{item.text}</Text>
-                <TouchableOpacity onPress={handleDelete}>
+                <TouchableOpacity>
                   <Trash />
                 </TouchableOpacity>
               </View>
@@ -110,12 +119,11 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     width: '100%',
-    height: 50,
     borderBottomWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    paddingTop: Constants.statusBarHeight,
+    paddingVertical: 10,
   },
   backIcon: {
     position: 'absolute',

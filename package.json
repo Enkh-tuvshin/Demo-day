@@ -78,6 +78,7 @@
     "react-native-svg": "14.1.0",
     "react-native-toast-message": "^2.2.0",
     "react-native-web": "~0.19.6",
+    "stream-chat": "^8.25.1",
     "stream-chat-expo": "^5.26.0",
     "stream-chat-react-native": "^5.26.0",
     "useref": "^1.4.4",

@@ -11,6 +11,8 @@ import { Profile } from '@/assets/icons/Profile';
 export default function Settings(): React.ReactNode {
   const { signOut, isSignedIn } = useAuth();
   const [isEnabled, setIsEnabled] = useState(false);
+  // const theme = useColorScheme();
+  // const isDarkTheme = theme === 'dark';
 
   const handleSignOut = (): void => {
     console.log(isSignedIn);
@@ -27,7 +29,7 @@ export default function Settings(): React.ReactNode {
     return (
       <View style={styles.header}>
         <View style={styles.backIcon}>
-          <Link href={'/'}>
+          <Link href="/">
             <Back />
           </Link>
         </View>
@@ -44,17 +46,13 @@ export default function Settings(): React.ReactNode {
           <Text style={{ fontSize: 16, fontWeight: '500', marginBottom: 15 }}>Өнгө солих:</Text>
           <View style={styles.Line1}>
             <Text style={styles.text}>Хар</Text>
-            <Switch
-              trackColor={{ false: 'light', true: 'dark' }}
-              value={isEnabled}
-              onChange={() => setIsEnabled(isEnabled ? false : true)}
-            />
+            <Switch value={isEnabled} onChange={() => setIsEnabled(!isEnabled)} />
           </View>
         </View>
 
         {/* 2 */}
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Link href={'/(tabs)/profile'}>
+          <Link href="/(tabs)/profile">
             <View
               style={{
                 flexDirection: 'row',
@@ -117,12 +115,11 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     width: '100%',
-    height: 50,
     borderBottomWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    paddingTop: Constants.statusBarHeight,
+    paddingVertical: 10,
   },
   backIcon: {
     position: 'absolute',
@@ -142,8 +139,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderWidth: 1,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    borderRadius: 10,
   },
   text: {
     fontSize: 18,

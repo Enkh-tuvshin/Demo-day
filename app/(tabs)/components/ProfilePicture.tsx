@@ -3,11 +3,13 @@ import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-import { Camera } from '@/assets/icons/Camera';
+import { VideoCamera } from '@/assets/icons/Camera';
 import { Gallery } from '@/assets/icons/Gallery';
 
 export default function ProfilePicture(): React.ReactNode {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [image, setImage] = useState<null | any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [a, seta] = useState(false);
   const { user } = useUser();
   console.log(user?.primaryWeb3WalletId);
@@ -58,7 +60,7 @@ export default function ProfilePicture(): React.ReactNode {
             <Gallery />
           </TouchableOpacity>
           <TouchableOpacity onPress={captureImage}>
-            <Camera />
+            <VideoCamera />
           </TouchableOpacity>
         </View>
       </View>

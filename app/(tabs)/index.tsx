@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { Video, ResizeMode } from 'expo-av';
 import { useUser } from '@clerk/clerk-expo';
 import { Camera, CameraType } from 'expo-camera';
-import Constants from 'expo-constants';
 import { Link } from 'expo-router';
 import React, { useState } from 'react';
 import {
@@ -17,6 +18,7 @@ import {
 import Header from './components/Header';
 import Spinner from './components/spinner';
 
+import { VideoCamera } from '@/assets/icons/Camera';
 import { ChatUp } from '@/assets/icons/ChatUp';
 import { FilterEmoji } from '@/assets/icons/FilterEmoji';
 import { Microphone } from '@/assets/icons/Microphone';
@@ -34,6 +36,28 @@ const Home = (): React.ReactNode => {
   const [statistic, requestPermission] = Camera.useCameraPermissions();
   const { user } = useUser();
   const [a, seta] = useState('');
+  const [hideCamera, setHideCamera] = useState('');
+
+  const datas = [
+    {
+      title: [
+        'user',
+        'user1',
+        'user2',
+        'user3',
+        'user4',
+        'user5',
+        'user6',
+        'user7',
+        'user8',
+        'user9',
+        'user10',
+        'user11',
+        'user12',
+        'user13',
+      ],
+    },
+  ];
 
   if (data) {
   }
@@ -51,6 +75,8 @@ const Home = (): React.ReactNode => {
   //     </View>
   //   );
   // }
+
+  const skip = (): void => {};
 
   if (!statistic || !statistic.granted) {
     return (
@@ -96,7 +122,7 @@ const Home = (): React.ReactNode => {
           </TouchableOpacity>
         </View>
         <TouchableOpacity activeOpacity={0.4}>
-          <Link href={'./components/ChatScreen'}>
+          <Link href="./components/ChatScreen">
             <View style={styles.chat}>
               <Text>Chat</Text>
               <ChatUp />
@@ -113,32 +139,8 @@ const Home = (): React.ReactNode => {
       <View style={styles.container}>
         {/* user 1 */}
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          {/* <Image source={{ uri: image?.uri }} /> */}
-          <Image
-            source={{ uri: image?.uri }}
-            style={
-              a
-                ? { display: 'none' }
-                : {
-                    justifyContent: 'center',
-                    width: 99,
-                    height: 99,
-                    borderRadius: 100,
-                    borderWidth: 1,
-                    borderColor: 'black',
-                    margin: 10,
-                  }
-            }
-          />
           <Text style={{ fontSize: 16, fontWeight: '500' }}>{user?.username} show Camera</Text>
         </View>
-
-        {/* <Video
-          ref={video}
-          style={{ flex: 1 }}
-          source={{ uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
-          resizeMode={ResizeMode.CONTAIN}
-        /> */}
 
         {/* user 2 */}
 
@@ -146,7 +148,7 @@ const Home = (): React.ReactNode => {
           <Camera
             style={{
               marginTop: -150,
-              width: width,
+              width,
               height: width * 1.33,
             }}
             type={users}

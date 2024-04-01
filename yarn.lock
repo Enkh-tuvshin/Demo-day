@@ -14452,6 +14452,21 @@ stream-chat-react-native@^5.26.0:
     es6-symbol "^3.1.3"
     stream-chat-react-native-core "5.26.0"
 
+stream-chat@^8.25.1:
+  version "8.25.1"
+  resolved "https://registry.npmjs.org/stream-chat/-/stream-chat-8.25.1.tgz"
+  integrity sha512-9U4aVbLmRrRumxMGq4Fr/Y6vR30JSTxC9BkU3uGf3q+QZam3t4XA6TzsTJdJ6c34+QBSXL/k1hlsyA/InxKOLQ==
+  dependencies:
+    "@babel/runtime" "^7.16.3"
+    "@types/jsonwebtoken" "~9.0.0"
+    "@types/ws" "^7.4.0"
+    axios "^1.6.0"
+    base64-js "^1.5.1"
+    form-data "^4.0.0"
+    isomorphic-ws "^4.0.1"
+    jsonwebtoken "~9.0.0"
+    ws "^7.4.4"
+
 stream-chat@8.17.0:
   version "8.17.0"
   resolved "https://registry.npmjs.org/stream-chat/-/stream-chat-8.17.0.tgz"

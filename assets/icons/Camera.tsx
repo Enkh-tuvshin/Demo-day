@@ -1,6 +1,6 @@
 import { Path, Svg } from 'react-native-svg';
 
-export const Camera = (): React.ReactNode => {
+export const VideoCamera = (): React.ReactNode => {
   return (
     <Svg
       width="44"
