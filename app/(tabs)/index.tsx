@@ -124,7 +124,7 @@ const Home = (): React.ReactNode => {
         <TouchableOpacity activeOpacity={0.4}>
           <Link href="./components/ChatScreen">
             <View style={styles.chat}>
-              <Text>Chat</Text>
+              <Text style={{ marginRight: 5 }}>Чатлах</Text>
               <ChatUp />
             </View>
           </Link>

@@ -5,6 +5,7 @@ import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { VideoCamera } from '@/assets/icons/Camera';
 import { Gallery } from '@/assets/icons/Gallery';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ProfilePicture(): React.ReactNode {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -12,18 +13,17 @@ export default function ProfilePicture(): React.ReactNode {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [a, seta] = useState(false);
   const { user } = useUser();
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
   console.log(user?.primaryWeb3WalletId);
-
-  const captureImage = async (): Promise<void> => {
-    const result = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 4,
-    });
-    if (!result.canceled) {
-      setImage(result.assets[0]);
+  
+  const saveProfilePicture = async (imageUri: string) => {
+    try {
+      setProfilePicture(imageUri);
+      await AsyncStorage.setItem('profilePicture', imageUri);
+    } catch (error) {
+      console.error('Error saving profile picture:', error);
     }
-  };
+  }
 
   const pickImage = async (): Promise<void> => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -33,36 +33,31 @@ export default function ProfilePicture(): React.ReactNode {
       quality: 1,
     });
     if (!result.canceled) {
-      setImage(result.assets[0]);
+      saveProfilePicture(image);
     }
   };
 
   return (
-    <View style={{ margin: 10, borderWidth: 1, borderColor: 'black', borderRadius: 10 }}>
+    <View style={{ margin: 10, borderWidth: 2, borderColor: 'black', borderRadius: 10 }}>
       <View style={styles.image}>
-        <Image
-          source={{ uri: image?.uri }}
-          style={
-            a
-              ? { display: 'none' }
-              : {
+        <TouchableOpacity onPress={pickImage}>
+          <Image
+            source={{ uri: image?.uri }}
+            style={
+              a
+                ? { display: 'none' }
+                : {
                   display: 'flex',
                   width: 150,
                   height: 150,
+                  borderWidth: 1,
                   borderRadius: 100,
-                  borderWidth: 3,
                   borderColor: 'black',
+                  margin: 10
                 }
-          }
-        />
-        <View style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <TouchableOpacity onPress={pickImage}>
-            <Gallery />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={captureImage}>
-            <VideoCamera />
-          </TouchableOpacity>
-        </View>
+            }
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );

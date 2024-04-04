@@ -15,7 +15,7 @@ export default function Header(): React.ReactNode {
           width={50}
           height={50}
         />
-        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Mongol TV</Text>
+        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Монгол TV</Text>
       </View>
       <Link href={'/(tabs)/settings'}>
         <Settings />

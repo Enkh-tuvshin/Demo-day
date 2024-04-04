@@ -1,120 +1,123 @@
-import { useUser } from '@clerk/clerk-expo';
-import Constants from 'expo-constants';
-import { Link } from 'expo-router';
-import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
-
-import { Back } from '@/assets/icons/Back';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TextInput, Button, FlatList, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Constants from "expo-constants";
 import { SendChat } from '@/assets/icons/SendChat';
-import { Trash } from '@/assets/icons/Trash';
+import { useUser } from '@clerk/clerk-expo';
+import { Link } from 'expo-router';
+import { Back } from '@/assets/icons/Back';
 
 interface Message {
   id: string;
   text: string;
 }
 
-const ChatScreen = (): React.ReactNode => {
+export default function ChatApp() {
+  const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
-  const [inputText, setInputText] = useState<string>('');
   const { user } = useUser();
 
-  const handleSend = (): React.ReactNode => {
-    if (inputText.trim() === '') return;
-    const newMessage: Message = {
-      id: String(messages.length + 1),
-      text: inputText,
-    };
-    setMessages([...messages, newMessage]);
-    setInputText('');
+  useEffect(() => {
+    loadMessages();
+  }, []);
+
+  const loadMessages = async () => {
+    try {
+      const storedMessages = await AsyncStorage.getItem('chatMessages');
+      if (storedMessages !== null) {
+        setMessages(JSON.parse(storedMessages));
+      }
+    } catch (error) {
+      console.error('Error loading messages:', error);
+    }
+  };
+
+  const saveMessage = async (newMessage: Message) => {
+    try {
+      const updatedMessages = [...messages, newMessage];
+      setMessages(updatedMessages);
+      await AsyncStorage.setItem('chatMessages', JSON.stringify(updatedMessages));
+    } catch (error) {
+      console.error('Error saving message:', error);
+    }
+  };
+
+  const handleSendMessage = () => {
+    if (message.trim() !== '') {
+      const newMessage: Message = {
+        id: String(Date.now()),
+        text: message.trim(),
+      };
+      saveMessage(newMessage);
+      setMessage('');
+    }
   };
 
   const Header = (): React.ReactNode => {
     return (
       <View style={styles.header}>
         <View style={styles.backIcon}>
-          <Link href="/">
+          <Link href={'/'}>
             <Back />
           </Link>
         </View>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: '600',
-            color: 'black',
-            zIndex: 1,
-            textAlign: 'center',
-          }}>
-          Chat
-        </Text>
+        <Text style={{ fontSize: 20, fontWeight: '600', color: 'black' }}>Чатлах</Text>
       </View>
     );
   };
 
   return (
-    <View style={{ flex: 1, paddingTop: Constants.statusBarHeight, backgroundColor: 'white' }}>
+    <View style={{ paddingTop: Constants.statusBarHeight, flex: 1, backgroundColor: 'white' }}>
       <Header />
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          padding: 10,
-        }}>
+      <View style={styles.container}>
         <FlatList
           data={messages}
-          renderItem={({ item }) => (
-            <View style={{ flex: 1, paddingHorizontal: 10 }}>
-              <Text>{user?.username}:</Text>
-              <View style={styles.lowCont}>
-                <Text style={styles.text}>{item.text}</Text>
-                <TouchableOpacity>
-                  <Trash />
-                </TouchableOpacity>
-              </View>
-            </View>
-          )}
+          renderItem={({ item }) =>
+            <View>
+              <Text style={{
+                fontWeight: 'bold'
+              }}>{user?.username}:</Text>
+              <Text style={{ margin: 10, borderWidth: 1, borderRadius: 10, width: '50%', padding: 10 }}>{item.text}</Text>
+            </View>}
           keyExtractor={(item) => item.id}
-          inverted
         />
       </View>
-      <View
-        style={{
-          margin: 10,
-          flexDirection: 'row',
-          alignItems: 'center',
-          bottom: 0,
-        }}>
+      <View style={styles.inputContainer} >
         <TextInput
-          style={{
-            flex: 1,
-            marginRight: 10,
-            borderWidth: 1,
-            paddingHorizontal: 10,
-            paddingVertical: 5,
-            borderRadius: 5,
-          }}
-          value={inputText}
-          onChangeText={(text) => setInputText(text)}
-          placeholder="Type your message here..."
+          style={styles.input}
+          value={message}
+          onChangeText={(text) => setMessage(text)}
+          placeholder="Type your message"
         />
-        <TouchableOpacity onPress={handleSend} style={styles.Button}>
+        <TouchableOpacity onPress={handleSendMessage}>
           <SendChat />
         </TouchableOpacity>
-      </View>
+      </View >
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  Button: {
-    margin: 10,
+  container: {
+    flex: 1,
+    paddingHorizontal: 10,
   },
-  text: {
-    margin: 10,
-    padding: 10,
+  inputContainer: {
+    width: '100%',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderTopWidth: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  input: {
+    flex: 1,
+    marginRight: 10,
     borderWidth: 1,
-    borderTopRightRadius: 10,
-    borderBottomLeftRadius: 10,
-    borderTopLeftRadius: 10,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    paddingHorizontal: 10,
   },
   header: {
     flexDirection: 'row',
@@ -133,11 +136,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  lowCont: {
-    width: '50%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
 });
-
-export default ChatScreen;

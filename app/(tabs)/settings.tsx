@@ -33,7 +33,7 @@ export default function Settings(): React.ReactNode {
             <Back />
           </Link>
         </View>
-        <Text style={{ fontSize: 20, fontWeight: '600', color: 'black' }}>Settings</Text>
+        <Text style={{ fontSize: 20, fontWeight: '600', color: 'black' }}>Тохиргоо</Text>
       </View>
     );
   };
