@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, FlatList, TouchableOpacity } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Constants from "expo-constants";
-import { SendChat } from '@/assets/icons/SendChat';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useUser } from '@clerk/clerk-expo';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Constants from 'expo-constants';
 import { Link } from 'expo-router';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TextInput, FlatList, TouchableOpacity } from 'react-native';
+
 import { Back } from '@/assets/icons/Back';
+import { SendChat } from '@/assets/icons/SendChat';
 
 interface Message {
   id: string;
   text: string;
 }
 
-export default function ChatApp() {
+export default function ChatApp(): React.ReactNode {
   const [message, setMessage] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
   const { user } = useUser();
@@ -21,7 +24,7 @@ export default function ChatApp() {
     loadMessages();
   }, []);
 
-  const loadMessages = async () => {
+  const loadMessages = async (): Promise<void> => {
     try {
       const storedMessages = await AsyncStorage.getItem('chatMessages');
       if (storedMessages !== null) {
@@ -32,7 +35,7 @@ export default function ChatApp() {
     }
   };
 
-  const saveMessage = async (newMessage: Message) => {
+  const saveMessage = async (newMessage: Message): Promise<void> => {
     try {
       const updatedMessages = [...messages, newMessage];
       setMessages(updatedMessages);
@@ -42,7 +45,7 @@ export default function ChatApp() {
     }
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = (): void => {
     if (message.trim() !== '') {
       const newMessage: Message = {
         id: String(Date.now()),
@@ -57,7 +60,7 @@ export default function ChatApp() {
     return (
       <View style={styles.header}>
         <View style={styles.backIcon}>
-          <Link href={'/'}>
+          <Link href="/">
             <Back />
           </Link>
         </View>
@@ -72,17 +75,30 @@ export default function ChatApp() {
       <View style={styles.container}>
         <FlatList
           data={messages}
-          renderItem={({ item }) =>
+          renderItem={({ item }) => (
             <View>
-              <Text style={{
-                fontWeight: 'bold'
-              }}>{user?.username}:</Text>
-              <Text style={{ margin: 10, borderWidth: 1, borderRadius: 10, width: '50%', padding: 10 }}>{item.text}</Text>
-            </View>}
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                }}>
+                {user?.username}:
+              </Text>
+              <Text
+                style={{
+                  margin: 10,
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  width: '50%',
+                  padding: 10,
+                }}>
+                {item.text}
+              </Text>
+            </View>
+          )}
           keyExtractor={(item) => item.id}
         />
       </View>
-      <View style={styles.inputContainer} >
+      <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
           value={message}
@@ -92,7 +108,7 @@ export default function ChatApp() {
         <TouchableOpacity onPress={handleSendMessage}>
           <SendChat />
         </TouchableOpacity>
-      </View >
+      </View>
     </View>
   );
 }

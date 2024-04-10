@@ -3,8 +3,8 @@ import { Path, Svg } from 'react-native-svg';
 export const FilterEmoji = (): React.ReactNode => {
   return (
     <Svg
-      width="30"
-      height="30"
+      width="25"
+      height="25"
       style={{ marginHorizontal: 10, marginVertical: 5 }}
       viewBox="0 0 24 24"
       stroke-width="1.5"

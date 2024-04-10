@@ -1,18 +1,16 @@
 import { useAuth } from '@clerk/clerk-expo';
 import Constants from 'expo-constants';
 import { Link, router } from 'expo-router';
-import { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Switch } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+
+import ProfilePage from './ProfilePage';
 
 import { Back } from '@/assets/icons/Back';
+import { LoginIcon } from '@/assets/icons/LoginIcon';
 import { Logout } from '@/assets/icons/Logout';
-import { Profile } from '@/assets/icons/Profile';
 
 export default function Settings(): React.ReactNode {
   const { signOut, isSignedIn } = useAuth();
-  const [isEnabled, setIsEnabled] = useState(false);
-  // const theme = useColorScheme();
-  // const isDarkTheme = theme === 'dark';
 
   const handleSignOut = (): void => {
     console.log(isSignedIn);
@@ -42,35 +40,28 @@ export default function Settings(): React.ReactNode {
     <View style={styles.innerContainer}>
       <Header />
       <View style={styles.container}>
-        <View style={{ paddingVertical: 30 }}>
-          <Text style={{ fontSize: 16, fontWeight: '500', marginBottom: 15 }}>Өнгө солих:</Text>
-          <View style={styles.Line1}>
-            <Text style={styles.text}>Хар</Text>
-            <Switch value={isEnabled} onChange={() => setIsEnabled(!isEnabled)} />
-          </View>
-        </View>
-
-        {/* 2 */}
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Link href="/(tabs)/profile">
-            <View
-              style={{
-                flexDirection: 'row',
-                width: 350,
-                height: 80,
-                borderWidth: 2,
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: 10,
-              }}>
-              <Profile />
-              <Text style={{ fontSize: 24, fontWeight: '500' }}>Нүүр хуудас</Text>
-            </View>
-          </Link>
+        <View style={{ flex: 1, marginBottom: -150 }}>
+          <ProfilePage />
         </View>
 
         {/* 3 */}
+
+        <Link href="/(tabs)/components/login">
+          <View
+            style={{
+              flexDirection: 'row',
+              width: 370,
+              padding: 10,
+              borderWidth: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <LoginIcon />
+            <Text style={{ fontSize: 16, fontWeight: '500' }}>Бүртгүүлэх хуудас</Text>
+          </View>
+        </Link>
+
+        {/* 4 */}
 
         <View
           style={{

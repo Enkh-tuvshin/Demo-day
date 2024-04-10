@@ -6,15 +6,37 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
 
+import Spinner from './spinner';
+
+import { useGetTodoListQuery } from '@/graphql/generated';
+
 export default function Login(): React.ReactNode {
   const { signIn, setActive, isLoaded } = useSignIn();
+  const { data, error, loading } = useGetTodoListQuery();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [selected, setSelected] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const data = [{ key: '5', value: 'Монгол' }];
+  const datas = [{ value: 'Монгол' }];
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Spinner />
+      </View>
+    );
+  }
+  if (error) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Error: {error.message}</Text>
+      </View>
+    );
+  }
+  if (data) {
+  }
 
   const onSignInPress = async (): Promise<void> => {
     if (!isLoaded) {
@@ -77,7 +99,7 @@ export default function Login(): React.ReactNode {
         boxStyles={{ width: '80%' }}
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         setSelected={(val: any) => setSelected(val)}
-        data={data}
+        data={datas}
         save="value"
       />
       <Link href="(tabs)/components/changePassword" style={{ width: '80%', textAlign: 'right' }}>
@@ -101,6 +123,7 @@ export default function Login(): React.ReactNode {
 
 const styles = StyleSheet.create({
   container: {
+    zIndex: 1,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',

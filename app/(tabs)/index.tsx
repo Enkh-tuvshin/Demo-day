@@ -12,52 +12,28 @@ import {
   TouchableOpacity,
   View,
   useWindowDimensions,
-  Image,
 } from 'react-native';
+import { RTCView, RTCPeerConnection, mediaDevices } from 'react-native-webrtc';
 
 import Header from './components/Header';
 import Spinner from './components/spinner';
 
-import { VideoCamera } from '@/assets/icons/Camera';
 import { ChatUp } from '@/assets/icons/ChatUp';
-import { FilterEmoji } from '@/assets/icons/FilterEmoji';
 import { Microphone } from '@/assets/icons/Microphone';
+import { MuteMic } from '@/assets/icons/MuteMic';
 import { Repeat } from '@/assets/icons/Repeat';
 import { useGetTodoListQuery } from '@/graphql/generated';
 
 const Home = (): React.ReactNode => {
-  // const video = useRef(null);
   const [users, setUsers] = useState(CameraType.front);
   const [text, setText] = useState<'Буцах' | 'Эхлэх' | 'Алгасах'>('Эхлэх');
-  const [image, setImage] = useState<any>(null);
-  const { width, height: windowHeight } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const [camera, setCamera] = useState<any>(null);
   const { data, error, loading } = useGetTodoListQuery();
   const [statistic, requestPermission] = Camera.useCameraPermissions();
   const { user } = useUser();
-  const [a, seta] = useState('');
-  const [hideCamera, setHideCamera] = useState('');
-
-  const datas = [
-    {
-      title: [
-        'user',
-        'user1',
-        'user2',
-        'user3',
-        'user4',
-        'user5',
-        'user6',
-        'user7',
-        'user8',
-        'user9',
-        'user10',
-        'user11',
-        'user12',
-        'user13',
-      ],
-    },
-  ];
+  const [isMuted, setIsMuted] = useState(false);
+  const [stream, setStream] = useState<MediaStream | null>(null);
 
   if (data) {
   }
@@ -68,15 +44,17 @@ const Home = (): React.ReactNode => {
       </View>
     );
   }
-  // if (error) {
-  //   return (
-  //     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-  //       <Text>Error: {error.message}</Text>
-  //     </View>
-  //   );
-  // }
+  if (error) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Error: {error.message}</Text>
+      </View>
+    );
+  }
 
-  const skip = (): void => {};
+  const skip = (): React.ReactNode => {
+    return null;
+  };
 
   if (!statistic || !statistic.granted) {
     return (
@@ -86,8 +64,19 @@ const Home = (): React.ReactNode => {
       </View>
     );
   }
+
   const handleFlipCamera = (): void => {
     setUsers(users === CameraType.front ? CameraType.back : CameraType.front);
+  };
+
+  const toggleMicrphone = (): void => {
+    if (stream) {
+      const audioTracks = stream.getAudioTracks();
+      if (audioTracks.length > 0) {
+        audioTracks[0].enabled = !isMuted;
+        setIsMuted(!isMuted);
+      }
+    }
   };
 
   const Footer = (): React.ReactNode => {
@@ -158,12 +147,7 @@ const Home = (): React.ReactNode => {
               <TouchableOpacity onPress={handleFlipCamera}>
                 <Repeat />
               </TouchableOpacity>
-              <TouchableOpacity>
-                <Microphone />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <FilterEmoji />
-              </TouchableOpacity>
+              <Text style={{ marginTop: 180 }}>.</Text>
             </View>
           </Camera>
         </View>

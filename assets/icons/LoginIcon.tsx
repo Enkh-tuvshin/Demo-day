@@ -1,6 +1,6 @@
 import { Svg, Path } from 'react-native-svg';
 
-export const Profile = (): React.ReactNode => {
+export const LoginIcon = (): React.ReactNode => {
   return (
     <Svg
       width="35"
@@ -12,9 +12,9 @@ export const Profile = (): React.ReactNode => {
       stroke-linecap="round"
       stroke-linejoin="round">
       <Path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <Path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-      <Path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-      <Path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+      <Path d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" />
+      <Path d="M3 12h13l-3 -3" />
+      <Path d="M13 15l3 -3" />
     </Svg>
   );
 };
